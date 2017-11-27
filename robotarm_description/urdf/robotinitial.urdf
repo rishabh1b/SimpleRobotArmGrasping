@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<robot name="simpleArm">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.5 0.1 0.9"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.45"/>
+    </visual>
+  </link>
+
+  <link name="first_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.01"/>
+      </geometry>
+      <origin rpy="1.57 0 0" xyz="0 0.075 0"/>
+    </visual>
+  </link>
+
+  <link name="second_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.15" radius="0.01"/>
+      </geometry>
+      <origin rpy="0 1.57 0" xyz="-0.075 0 0"/>
+    </visual>
+  </link>
+
+  <link name="third_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.3" radius="0.01"/>
+      </geometry>
+      <origin rpy="0 -1.57 0" xyz="-0.15 0 0"/>
+    </visual>
+  </link>
+
+
+  <joint name="base_to_first_link" type="revolute">
+    <parent link="base_link"/>
+    <child link="first_link"/>
+    <origin rpy="-1.57 0 0" xyz="0.25 0 0.8"/>
+    <axis xyz="0 0 1" />
+    <limit effort="300" velocity="0.1" lower="-0.42" upper="-2.1"/>
+  </joint>
+
+  <joint name="first_to_second_link" type="revolute">
+    <parent link="first_link"/>
+    <child link="second_link"/>
+    <origin rpy="0 1.57 0" xyz="0 0.1 0"/>
+    <axis xyz="0 0 1" />
+    <limit effort="300" velocity="0.1" lower="1.223" upper="-1.57"/>
+  </joint>
+
+  <joint name="second_to_third_link" type="revolute">
+    <parent link="second_link"/>
+    <child link="third_link"/>
+    <origin rpy="0 -1.57 0" xyz="-0.15 0 0"/>
+    <axis xyz="0 0 1" />
+    <limit effort="300" velocity="0.1" lower="0.174" upper="2.277"/>
+  </joint>
+
+</robot>
