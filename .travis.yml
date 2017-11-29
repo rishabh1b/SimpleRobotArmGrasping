@@ -9,7 +9,7 @@ compiler:
 notifications:
   email:
     recipients:
-      # - rbiyani@umd.edu
+      # - rbiyani@terpmail.umd.edu
 env:
   matrix:
     - ROS_DISTRO=kinetic  ROS_REPO=ros              UPSTREAM_WORKSPACE=https://raw.githubusercontent.com/ros-planning/moveit/kinetic-devel/moveit.rosinstall
