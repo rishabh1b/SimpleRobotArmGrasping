@@ -37,33 +37,44 @@
 
   <gazebo reference="shoulder_pan_link">
     <material>Gazebo/Red</material>
+    <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
 <gazebo reference="shoulder_pitch_link">
     <material>Gazebo/Blue</material>
+    <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
   <gazebo reference="elbow_roll_link">
     <material>Gazebo/Red</material>
+    <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
  <gazebo reference="elbow_pitch_link">
     <material>Gazebo/Blue</material>
+    <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
 <gazebo reference="wrist_roll_link">
     <material>Gazebo/Red</material>
+    <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
   <gazebo reference="wrist_pitch_link">
     <material>GazeboBlue</material>
+    <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
 <!-- ros_control plugin -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/robot_arm</robotNamespace>
+      <turnGravityOff>true</turnGravityOff>
     </plugin>
 </gazebo>
-
+ 
+ <gazebo reference="base_link">
+    <static>true</static>
+    <turnGravityOff>true</turnGravityOff>
+</gazebo>
 	</robot>

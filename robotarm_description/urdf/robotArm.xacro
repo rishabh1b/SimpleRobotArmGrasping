@@ -27,7 +27,7 @@ This link is the base of the arm in which arm is placed
  <!-- base_link Properties -->
   <property name="base_link_width" value="0.5" />
   <property name="base_link_depth" value="0.06" />
-  <property name="base_link_height" value="1" />
+  <property name="base_link_height" value="0.6" />
 
   <property name="base_link2_height" value = "0.02" />
 
@@ -64,11 +64,41 @@ This link is the base of the arm in which arm is placed
   <property name="wrist_pitch_height" value="0.04" />
 
   <joint name="bottom_joint2" type="fixed">
-    <origin xyz="0.15 0.07 0.38" rpy="0 0 0" />
+    <origin xyz="0.15 0.07 0.15" rpy="0 0 0" />
     <parent link="base_link"/>
     <child link="base_link_2"/>
 </joint>
 
+<joint name="bottom_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="bottom_link"/>
+  </joint>
+
+  <link name="bottom_link">
+
+    <visual>
+      <origin xyz=" 0 0 -${base_link_height/2}"  rpy="0 0 0"/>
+      <geometry>
+
+         <box size="0.5 0.5 0.02" />
+
+      </geometry>
+      <material name="Brown" />
+    </visual>
+
+    <collision>
+      <origin xyz=" 0 0 -0.04"  rpy="0 0 0"/>
+      <geometry>
+         <box size="1 1 0.02" />
+      </geometry>
+      </collision>>
+      <xacro:inertial_matrix mass="100"/>
+  </link>
+
+  <gazebo reference="bottom_link">
+    <material>Gazebo/White</material>
+</gazebo>
 
 <!-- BASE LINK -->
   <link name="base_link">
