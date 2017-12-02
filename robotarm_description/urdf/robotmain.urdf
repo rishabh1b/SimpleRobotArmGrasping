@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!-- BOTTOM FIXED LINK 
+This link is the base of the arm in which arm is placed 
+-->
+<robot name="simpleArm">
+
+<joint name="bottom_joint2" type="fixed">
+    <origin xyz="0.15 0.07 0.38" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="base_link_2"/>
+</joint>
+
+
+<!-- BASE LINK -->
+  <link name="base_link">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" /> <!-- rotate PI/2 -->
+      <geometry>
+	        <box size="0.5 0.06 1" />
+      </geometry>
+    </visual>
+
+</link>
+
+<!-- BASE LINK -->
+  <link name="base_link_2">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" /> 
+      <geometry>
+          <cylinder radius="0.04" length="0.02"/>
+      </geometry>
+    </visual>
+
+</link>
+
+<joint name="shoulder_pan_joint" type="revolute">
+    <parent link="base_link_2"/>
+    <child link="shoulder_pan_link"/>
+    <origin xyz="0 0 0.02" rpy="0 0 -1.573" />
+    <axis xyz="0 0 1" />
+    <limit effort="300" velocity="1" lower="-2.61799387799" upper="1.98394848567"/>
+    <dynamics damping="50" friction="1"/>
+</joint>
+
+<!-- SHOULDER PAN LINK -->
+  <link name="shoulder_pan_link" >
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+
+            <cylinder radius="0.04" length="0.02"/>
+
+      </geometry>
+    </visual>
+
+</link>
+
+  <joint name="shoulder_pitch_joint" type="revolute">
+    <parent link="shoulder_pan_link"/>
+    <child link="shoulder_pitch_link"/>
+    <origin xyz="-0.041 0.0021 0.0" rpy="-1.573 0 1.573" />
+    <axis xyz="1 0 0" />
+    <limit effort="300" velocity="1" lower="-1.19962513147" upper="1.89994105047" />
+    <dynamics damping="50" friction="1"/>
+</joint>
+
+<!-- SHOULDER PITCH LINK -->
+  <link name="shoulder_pitch_link" >
+
+    <visual>
+      <origin xyz="-0.002 0 0.04" rpy="0 1.573 0" />
+      <geometry>
+
+           <box size="0.14 0.04 0.04" />
+
+      </geometry>
+    </visual>
+
+</link>
+
+ <joint name="elbow_roll_joint" type="revolute">
+    <parent link="shoulder_pitch_link"/>
+    <child link="elbow_roll_link"/>
+    <origin xyz="-0.002 0 0.1206" rpy="3.146 1.573 0" />
+    <axis xyz="-1 0 0" />
+    <limit effort="300" velocity="1" lower="-2.61799387799" upper="0.705631162427" />
+    <dynamics damping="50" friction="1"/>
+</joint>
+
+<!-- ELBOW ROLL LINK -->
+  <link name="elbow_roll_link" >
+
+    <visual>
+      <origin xyz="-0.015 0.0 -0.0" rpy="0 1.573 0" />
+      <geometry>
+
+            <cylinder radius= "0.02" length="0.06"/>
+
+      </geometry>
+    </visual>
+
+</link>
+
+<joint name="elbow_pitch_joint" type="revolute">
+    <parent link="elbow_roll_link"/>
+    <child link="elbow_pitch_link"/>
+    <origin xyz="-0.035 0 0.0" rpy="0.055 1.573 0" />
+    <axis xyz="1 0 0" />
+    <limit effort="300" velocity="1" lower="-1.5953400194" upper="1.93281579274" />
+    <dynamics damping="50" friction="1"/>
+</joint>
+
+<!-- ELBOW PITCH LINK -->
+  <link name="elbow_pitch_link" >
+
+    <visual>
+      <origin xyz="0 0 -0.12" rpy="0 1.573 0" />
+      <geometry>
+
+       <box size="0.22 0.04 0.04" />
+  
+      </geometry>
+    </visual>
+
+</link>
+
+<joint name="wrist_roll_joint" type="revolute">
+    <parent link="elbow_pitch_link"/>
+    <child link="wrist_roll_link"/>
+    <origin xyz="0.0 0.0081 -.248" rpy="0 1.573 3.146" />
+    <axis xyz="1 0 0" />
+    <limit effort="300" velocity="1" lower="-2.61799387799" upper="2.6128806087" />
+    <dynamics damping="50" friction="1"/>
+</joint>
+
+<link name="wrist_roll_link" >
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.573 0" />
+      <geometry>
+           <cylinder radius="0.02" length="0.04"/>
+      </geometry>
+    </visual>
+
+</link>
+
+<joint name="wrist_pitch_joint" type="revolute">
+    <parent link="wrist_roll_link"/>
+    <child link="wrist_pitch_link"/>
+    <origin xyz="0.0 0.0 0.0001" rpy="0 1.573 0" />
+    <axis xyz="1 0 0" />
+    <limit effort="300" velocity="1" lower="-1.5953400194" upper="1.98394848567" />
+    <dynamics damping="50" friction="1"/>
+</joint>
+
+
+<!-- WRIST PITCH LINK -->
+  <link name="wrist_pitch_link">
+
+    <visual>
+      <origin xyz="0 0 0.04" rpy="0 1.573 0" />
+      <geometry>
+
+           <box size="0.06 0.04 0.04" />
+  
+      </geometry>
+    </visual>
+
+</link>
+
+
+</robot>
