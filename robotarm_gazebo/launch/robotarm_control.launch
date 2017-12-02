@@ -1,3 +1,6 @@
+<?xml version="1.0"?>
+<robot name="six_dof_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
 <launch>
   <!-- Launch Gazebo  -->
   <include file="$(find robotarm_gazebo)/launch/robotarm_world.launch" />   
@@ -25,3 +28,4 @@
   </node>
 
 </launch>
+</robot>

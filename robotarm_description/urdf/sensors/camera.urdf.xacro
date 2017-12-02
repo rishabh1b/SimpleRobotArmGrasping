@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- BOTTOM FIXED LINK 
+This link is the base of the arm in which arm is placed 
+-->
+<robot name="six_dof_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<joint name="camera_joint" type="fixed">
+    <origin xyz="0 0.5 1" rpy="${M_PI} 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+  </joint>
+  
+<!-- Camera -->
+   
+   <link name="camera_link">
+
+   <collision>
+   <origin xyz="0 0 0.05" rpy="${-M_PI/2} 0 0"/>
+   <geometry>
+   <mesh filename="package://robotarm_description/meshes/camera.STL" />
+   </geometry>
+   </collision>
+
+   <visual>
+   <origin xyz="0 0 0.05" rpy="${-M_PI/2}  0 0"/>
+   <geometry>
+   <mesh filename="package://robotarm_description/meshes/camera.STL" />
+   </geometry>
+   <material name="red"/>
+   </visual>
+
+   <inertial>
+   <mass value="1e-5" />
+   <origin xyz="0 0 0.05" rpy="${-M_PI/2}  0 0"/>
+   <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+   </inertial>
+   </link>
+
+   <xacro:include filename="$(find robotarm_description)/urdf/sensors/camera.gazebo.xacro"/>
+</robot>

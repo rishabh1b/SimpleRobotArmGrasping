@@ -27,7 +27,7 @@ This link is the base of the arm in which arm is placed
  <!-- base_link Properties -->
   <property name="base_link_width" value="0.5" />
   <property name="base_link_depth" value="0.06" />
-  <property name="base_link_height" value="0.6" />
+  <property name="base_link_height" value="1" />
 
   <property name="base_link2_height" value = "0.02" />
 
@@ -64,7 +64,7 @@ This link is the base of the arm in which arm is placed
   <property name="wrist_pitch_height" value="0.04" />
 
   <joint name="bottom_joint2" type="fixed">
-    <origin xyz="0.15 0.07 0.15" rpy="0 0 0" />
+    <origin xyz="0.15 0.07 0.38" rpy="0 0 0" />
     <parent link="base_link"/>
     <child link="base_link_2"/>
 </joint>
@@ -144,7 +144,7 @@ This link is the base of the arm in which arm is placed
 <joint name="shoulder_pan_joint" type="revolute">
     <parent link="base_link_2"/>
     <child link="shoulder_pan_link"/>
-    <origin xyz="0 0 0.02" rpy="0 0 -${M_PI/2}" />
+    <origin xyz="0 0 0.02" rpy="0 0 -${M_PI}" />
     <axis xyz="0 0 1" />
     <limit effort="300" velocity="1" lower="-2.61799387799" upper="1.98394848567"/>
     <dynamics damping="50" friction="1"/>
@@ -241,8 +241,8 @@ This link is the base of the arm in which arm is placed
 <joint name="elbow_pitch_joint" type="revolute">
     <parent link="elbow_roll_link"/>
     <child link="elbow_pitch_link"/>
-    <origin xyz="-0.035 0 0.0" rpy="0.055 ${M_PI/2} 0" />
-    <axis xyz="1 0 0" />
+    <origin xyz="-0.035 0 0.0" rpy="${-M_PI/2} 0 0"/> <!-- 0.055--> 
+    <axis xyz="0 1 0" />
     <limit effort="300" velocity="1" lower="-1.5953400194" upper="1.93281579274" />
     <dynamics damping="50" friction="1"/>
 </joint>
@@ -328,6 +328,8 @@ This link is the base of the arm in which arm is placed
     <xacro:inertial_matrix mass="1"/>
 
 </link>
+
+<xacro:include filename="$(find robotarm_description)/urdf/sensors/camera.urdf.xacro"/>
 <!-- Initiate Transmission Tags for Each joint-->
 
    <xacro:transmission_block joint_name="shoulder_pan_joint"/>
