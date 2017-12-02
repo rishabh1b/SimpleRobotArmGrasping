@@ -13,7 +13,7 @@
 	  <transmission name="tran1">
 	    <type>transmission_interface/SimpleTransmission</type>
 	    <joint name="${joint_name}">
-	      <hardwareInterface>PositionJointInterface</hardwareInterface>
+	      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
 	    </joint>
 	    <actuator name="motor1">
 	      <hardwareInterface>PositionJointInterface</hardwareInterface>

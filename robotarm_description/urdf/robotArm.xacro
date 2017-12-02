@@ -119,7 +119,7 @@ This link is the base of the arm in which arm is placed
       </geometry>
   </collision>
 
-<xacro:inertial_matrix mass="1"/>
+<!-- xacro:inertial_matrix mass="1" -->
 </link>
 
 <!-- BASE LINK -->
