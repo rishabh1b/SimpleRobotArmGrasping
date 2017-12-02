@@ -3,7 +3,7 @@
 This link is the base of the arm in which arm is placed 
 -->
 <robot name="simpleArm">
-
+  
 <joint name="bottom_joint2" type="fixed">
     <origin xyz="0.15 0.07 0.38" rpy="0 0 0" />
     <parent link="base_link"/>
@@ -169,6 +169,5 @@ This link is the base of the arm in which arm is placed
     </visual>
 
 </link>
-
 
 </robot>
