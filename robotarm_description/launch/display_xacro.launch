@@ -1,0 +1,25 @@
+<launch>
+<arg name="model" />
+ <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" />
+
+<!-- Parsing xacro and loading robot_description parameter -->
+<param name="robot_description" command="$(find xacro)/xacro
+$(find robotarm_description)/urdf/$(arg model)" />
+
+<!-- Setting gui parameter to true for display joint slider, for
+getting joint control -->
+<param name="use_gui" value="true"/>
+
+<!-- Starting Joint state publisher node which will publish the
+joint values -->
+<node name="joint_state_publisher" pkg="joint_state_publisher"
+type="joint_state_publisher" />
+
+<!-- Starting robot state publish which will publish current robot
+joint states using tf -->
+<node name="robot_state_publisher" pkg="robot_state_publisher"
+type="state_publisher" />
+
+<!-- Launch visualization in rviz -->
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+</launch>
