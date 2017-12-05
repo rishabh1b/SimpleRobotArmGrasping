@@ -9,7 +9,7 @@ This link is the base of the arm in which arm is placed
     <sensor type="camera" name="camera1">
       <update_rate>30.0</update_rate>
       <camera name="head">
-        <horizontal_fov>0.95</horizontal_fov>
+        <horizontal_fov>1.3</horizontal_fov>
         <!-- <horizontal_fov>0.95</horizontal_fov> -->
         <image>
           <width>800</width>
