@@ -106,7 +106,7 @@
         </inertia>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
-      <gravity>1</gravity>
+      <gravity>0</gravity>
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
       <visual name='visual'>

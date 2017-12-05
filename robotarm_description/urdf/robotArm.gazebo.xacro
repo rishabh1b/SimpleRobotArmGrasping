@@ -33,6 +33,7 @@
 
  <gazebo reference="base_link_2">
     <material>Gazebo/White</material>
+    <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
   <gazebo reference="shoulder_pan_link">
@@ -75,6 +76,6 @@
  
  <gazebo reference="base_link">
     <static>true</static>
-    <turnGravityOff>true</turnGravityOff>
+    <!-- turnGravityOff>true</turnGravityOff!-->
 </gazebo>
 	</robot>

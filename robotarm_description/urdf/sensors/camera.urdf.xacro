@@ -5,7 +5,7 @@ This link is the base of the arm in which arm is placed
 <robot name="six_dof_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <joint name="camera_joint" type="fixed">
-    <origin xyz="0 0.5 1" rpy="${M_PI} 0 0"/>
+    <origin xyz="0 0.2 2" rpy="${M_PI} 0 0"/>
     <parent link="base_link"/>
     <child link="camera_link"/>
   </joint>
