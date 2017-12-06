@@ -55,7 +55,14 @@ void VisionManager::detectTable() {
     pt.y = bbox.y + bbox.height / 2;
     cv::circle(image, pt, 2, cv::Scalar(0,0,255), -1,8);
 
-    // Draw Contours
+    // Update pixels_per_mm fields
+    pixels_permm_y = table_length / bbox.height;
+    pixels_permm_x = table_breadth / bbox.width;
+
+    // Update the boolean to indicate measurement has been received
+    pixel_size_identified = true;
+
+    // Draw Contours - For Debugging
     std::vector<std::vector<cv::Point> > contours;
     std::vector<cv::Vec4i> hierarchy;
 
@@ -73,6 +80,43 @@ void VisionManager::detectTable() {
 
 void VisionManager::detect2DObject(float& pixel_x, float& pixel_y) {
 	// Implement Color Thresholding and contour findings to get the location of object to be grasped in 2D
+	cv::Mat image, gray_image_green;
+    cv::Mat RGB[3];
+    image = curr_img.clone();
+    cv::split(image, RGB);
+
+    gray_image_green = RGB[1];
+
+    // Denoise the Image
+    cv::Mat denoiseImage;
+    cv::medianBlur(gray_image_green, denoiseImage, 3);
+
+    // Threshold the Image
+    cv::Mat binaryImage;
+    cv::threshold(denoiseImage, binaryImage, 160, 255, THRESH_BINARY);
+
+    // Get the centroid of the of the blob
+    std::vector<cv::Point> nonZeroPoints;
+    cv::findNonZero(binaryImage, nonZeroPoints);
+    cv::Rect bbox = cv::boundingRect(nonZeroPoints);
+    // cv::Point pt;
+    pixel_x = bbox.x + bbox.width / 2;
+    pixel_y = bbox.y + bbox.height / 2;
+    cv::circle(image, pt, 2, cv::Scalar(0,0,255), -1,8);
+
+    // Draw Contours
+    std::vector<std::vector<cv::Point> > contours;
+    std::vector<cv::Vec4i> hierarchy;
+
+    cv::findContours( binaryImage, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0) );
+    for( int i = 0; i< contours.size(); i++ )
+     {
+       cv::Scalar color = cv::Scalar( 255, 0, 0);
+       cv::drawContours( image, contours, i, color, 1, 8, hierarchy, 0, cv::Point() );
+     }
+
+    cv::namedWindow("Centre point", WINDOW_AUTOSIZE);
+    cv::imshow("Centre point", image);
 }
 
 void VisionManager::convertToMM(float& x, float& y) {
