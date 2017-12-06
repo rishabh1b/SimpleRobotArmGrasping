@@ -93,15 +93,19 @@ void VisionManager::detect2DObject(float& pixel_x, float& pixel_y) {
 
     // Threshold the Image
     cv::Mat binaryImage;
-    cv::threshold(denoiseImage, binaryImage, 160, 255, THRESH_BINARY);
+    cv::threshold(denoiseImage, binaryImage, 160, 255, cv::THRESH_BINARY);
 
     // Get the centroid of the of the blob
     std::vector<cv::Point> nonZeroPoints;
     cv::findNonZero(binaryImage, nonZeroPoints);
     cv::Rect bbox = cv::boundingRect(nonZeroPoints);
-    // cv::Point pt;
+    cv::Point pt;
     pixel_x = bbox.x + bbox.width / 2;
     pixel_y = bbox.y + bbox.height / 2;
+
+    // For Drawing
+    pt.x = bbox.x + bbox.width / 2;
+    pt.y = bbox.y + bbox.height / 2;
     cv::circle(image, pt, 2, cv::Scalar(0,0,255), -1,8);
 
     // Draw Contours
@@ -115,7 +119,7 @@ void VisionManager::detect2DObject(float& pixel_x, float& pixel_y) {
        cv::drawContours( image, contours, i, color, 1, 8, hierarchy, 0, cv::Point() );
      }
 
-    cv::namedWindow("Centre point", WINDOW_AUTOSIZE);
+    cv::namedWindow("Centre point", cv::WINDOW_AUTOSIZE);
     cv::imshow("Centre point", image);
 }
 
