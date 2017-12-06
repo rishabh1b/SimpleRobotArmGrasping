@@ -125,6 +125,11 @@ void VisionManager::detect2DObject(float& pixel_x, float& pixel_y) {
 
 void VisionManager::convertToMM(float& x, float& y) {
 	// Convert from pixel to world co-ordinates in the camera frame
+	float img_centre_x = 400;
+	float img_centre_y = 400;
+
+	x = (x - img_centre_x) / pixels_permm_x;
+	y = (y - img_centre_y) / pixels_permm_y;
 }
 
 // Temporary Main Function for testing- This should go away later
