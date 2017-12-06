@@ -73,8 +73,8 @@ void VisionManager::detectTable() {
        cv::drawContours( image, contours, i, color, 1, 8, hierarchy, 0, cv::Point() );
      }
 
-    cv::namedWindow("Centre point", cv::WINDOW_AUTOSIZE);
-    cv::imshow("Centre point", image); 
+    cv::namedWindow("Table Detection", cv::WINDOW_AUTOSIZE);
+    cv::imshow("Table Detection", image); 
 
 }
 
@@ -155,11 +155,10 @@ int main(int argc, char** argv ) {
 
     VisionManager vm(length, breadth);
     vm.get2DLocation(image, obj_x, obj_y);
+    std::cout<< " X-Co-ordinate in Camera Frame :" << obj_x << std::endl;
+    std::cout<< " Y-Co-ordinate in Camera Frame :" << obj_y << std::endl;
 
     cv::waitKey(0);
-
-    std::cout<< " X-Co-ordinate in Camera Frame" << obj_x;
-    std::cout<< " Y-Co-ordinate in Camera Frame" << obj_y;
 }
 
 
