@@ -97,7 +97,7 @@ This link is the base of the arm in which arm is placed
   </link>
 
   <gazebo reference="bottom_link">
-    <material>Gazebo/White</material>
+    <material>Gazebo/Black</material>
 </gazebo>
 
 <!-- BASE LINK -->

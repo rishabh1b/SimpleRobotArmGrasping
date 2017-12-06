@@ -24,15 +24,15 @@
 
 <!-- Material References of the Links for Gazebo-->
   <gazebo reference="bottom_link">
-    <material>Gazebo/White</material>
+    <material>Gazebo/Black</material>
 </gazebo>
 
  <gazebo reference="base_link">
-    <material>Gazebo/White</material>
+    <material>Gazebo/Black</material>
 </gazebo>
 
  <gazebo reference="base_link_2">
-    <material>Gazebo/White</material>
+    <material>Gazebo/Black</material>
     <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
@@ -62,7 +62,7 @@
 </gazebo>
 
   <gazebo reference="wrist_pitch_link">
-    <material>GazeboBlue</material>
+    <material>Gazebo/Blue</material>
     <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
