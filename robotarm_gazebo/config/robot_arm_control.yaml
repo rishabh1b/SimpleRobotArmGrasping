@@ -29,3 +29,7 @@ robot_arm:
     type: position_controllers/JointPositionController
     joint: wrist_pitch_joint
     pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: position_controllers/JointPositionController
+    joint: gripper_roll_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}

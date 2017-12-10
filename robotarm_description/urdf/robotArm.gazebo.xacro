@@ -66,6 +66,23 @@
     <turnGravityOff>true</turnGravityOff>
 </gazebo>
 
+<gazebo reference="gripper_roll_link">
+    <material>Gazebo/Red</material>
+    <turnGravityOff>true</turnGravityOff>
+</gazebo>
+
+
+<gazebo reference="l_gripper_aft_link">
+    <material>Gazebo/White</material>
+    <turnGravityOff>true</turnGravityOff>
+</gazebo>
+
+<gazebo reference="r_gripper_aft_link">
+    <material>Gazebo/White</material>
+    <turnGravityOff>true</turnGravityOff>
+</gazebo>
+
+
 <!-- ros_control plugin -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -76,6 +93,11 @@
  
  <gazebo reference="base_link">
     <static>true</static>
-    <!-- turnGravityOff>true</turnGravityOff!-->
+    <turnGravityOff>true</turnGravityOff>
+</gazebo>
+
+ <gazebo reference="bottom_link">
+    <static>true</static>
+    <!-- turnGravityOff>true</turnGravityOff -->
 </gazebo>
 	</robot>
