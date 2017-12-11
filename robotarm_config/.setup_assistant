@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: robotarm_description
+    relative_path: urdf/robotArm.xacro
+  SRDF:
+    relative_path: config/six_dof_arm.srdf
+  CONFIG:
+    author_name: Rishabh Biyani
+    author_email: rbiyani@umd.edu
+    generated_timestamp: 1512948504

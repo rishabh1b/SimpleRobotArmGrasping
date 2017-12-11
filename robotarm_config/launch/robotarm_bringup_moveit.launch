@@ -1,0 +1,25 @@
+<launch>
+
+
+  <!-- Launch Gazebo  -->
+  <include file="$(find robotarm_gazebo)/launch/robotarm_world.launch" />   
+
+  <!-- ros_control seven dof arm launch file -->
+  <include file="$(find robotarm_gazebo)/launch/robotarm_gazebo_states.launch" />   
+
+  <!-- ros_control position control dof arm launch file -->
+  <!--<include file="$(find robotarm_gazebo)/launch/robotarm_gazebo_position.launch" />  -->
+
+  <!-- ros_control trajectory control dof arm launch file -->
+  <include file="$(find robotarm_gazebo)/launch/robotarm_trajectory_controller.launch" />    
+
+  <!-- moveit launch file -->
+  <include file="$(find robotarm_config)/launch/moveit_planning_execution.launch" />    
+
+  <!-- Initiate the Joint State Publisher -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/>
+    <rosparam param="/source_list">[/robot_arm/joint_states]</rosparam>
+  </node>
+  
+</launch>
