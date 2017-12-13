@@ -19,6 +19,8 @@ private:
 	float curr_pixel_centre_y;
 	float table_length;
 	float table_breadth;
+	float img_centre_x_;
+	float img_centre_y_;
 	bool pixel_size_identified;
 	cv::Mat curr_img;
 };

@@ -14,6 +14,22 @@ SimpleGrasping::SimpleGrasping(ros::NodeHandle n_, float length, float breadth)
 
     // this->display_publisher = nh_.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
 
+     try {
+         this->tf_camera_to_robot.waitForTransform("/base_link", "/camera_link", ros::Time(0), ros::Duration(50.0) );
+     }
+   catch (tf::TransformException &ex) {
+            ROS_ERROR("[adventure_slam]: (wait) %s", ex.what());
+            ros::Duration(1.0).sleep();
+		} 
+
+    try {
+        this->tf_camera_to_robot.lookupTransform("/base_link", "/camera_link", ros::Time(0), (this->camera_to_robot_));
+      }
+ 
+    catch (tf::TransformException &ex) {
+      ROS_ERROR("[adventure_slam]: (lookup) %s", ex.what());
+	} 
+
     obj_found = false;
 }
 
@@ -37,7 +53,17 @@ void SimpleGrasping::imageCb(const sensor_msgs::ImageConstPtr& msg)
 	    std::cout<< " X-Co-ordinate in Camera Frame :" << obj_x << std::endl;
 	    std::cout<< " Y-Co-ordinate in Camera Frame :" << obj_y << std::endl;
 
+	    obj_camera_frame.setY(-obj_x);
+	    obj_camera_frame.setZ(-obj_y);
+	    obj_camera_frame.setX(4.78);
+        
+	    obj_robot_frame = camera_to_robot_ * obj_camera_frame;
 	    obj_found = true;
+
+	    std::cout<< " X-Co-ordinate in Robot Frame :" << obj_robot_frame.getX() << std::endl;
+	    std::cout<< " Y-Co-ordinate in Robot Frame :" << obj_robot_frame.getY() << std::endl;
+	    std::cout<< " Z-Co-ordinate in Robot Frame :" << obj_robot_frame.getZ() << std::endl;
+	    // cv::waitKey(0);
 	}
 }
 
@@ -96,6 +122,61 @@ void SimpleGrasping::attainPosition() {
   sleep(5.0);
 }
 
+void SimpleGrasping::attainObject() {
+  ROS_INFO("The attain Object function called");
+  ros::AsyncSpinner spinner(1);
+  spinner.start();
+  // sleep(2.0);
+
+  // Raw pointers are frequently used to refer to the planning group for improved performance.
+   const robot_state::JointModelGroup *joint_model_group =
+	group.getCurrentState()->getJointModelGroup("arm"); 
+
+  namespace rvt = rviz_visual_tools;
+  moveit_visual_tools::MoveItVisualTools visual_tools("base_link_2");
+  visual_tools.deleteAllMarkers();
+
+  // We can print the name of the reference frame for this robot.
+  ROS_INFO("Reference frame: %s", group.getPlanningFrame().c_str());
+  
+  // We can also print the name of the end-effector link for this group.
+  ROS_INFO("Reference frame: %s", group.getEndEffectorLink().c_str());
+
+  ROS_INFO("Group names: %s", 	group.getName().c_str());
+
+  // For getting the pose
+  geometry_msgs::PoseStamped currPose = group.getCurrentPose();
+  std::cout<<group.getCurrentPose();
+
+  geometry_msgs::Pose target_pose1;
+  target_pose1.orientation = currPose.pose.orientation;
+  //target_pose1.position.x = 0.4;
+  //target_pose1.position.y = 0.04;
+  //target_pose1.position.z = 0.32;
+
+   // Starting Postion before picking
+   target_pose1.position.x = obj_robot_frame.getX();
+   target_pose1.position.y = obj_robot_frame.getY();
+   target_pose1.position.z = obj_robot_frame.getZ();
+   group.setPoseTarget(target_pose1);
+
+  moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+
+  bool success = group.plan(my_plan);
+
+  /*ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");
+
+  ROS_INFO_NAMED("tutorial", "Visualizing plan 1 as trajectory line");
+  visual_tools.publishAxisLabeled(target_pose1, "pose1");
+  // visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
+  visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+  visual_tools.trigger();
+  visual_tools.prompt("next step");*/
+
+  group.move();
+  sleep(5.0);
+}
+
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "simple_grasping");
@@ -106,5 +187,6 @@ int main(int argc, char** argv)
   SimpleGrasping simGrasp(n); 
   ros::spinOnce();
   simGrasp.attainPosition();
+  simGrasp.attainObject();
   return 0;
 }

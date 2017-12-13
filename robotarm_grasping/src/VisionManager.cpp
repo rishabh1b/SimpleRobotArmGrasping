@@ -8,6 +8,8 @@ VisionManager::VisionManager(float length, float breadth) {
 
 void VisionManager::get2DLocation(cv::Mat img, float&x, float& y) {
 this->curr_img = img;
+img_centre_x_ = img.rows / 2;
+img_centre_y_ = img.cols / 2;
 if (!pixel_size_identified) {
 	detectTable();
 }
@@ -129,11 +131,9 @@ void VisionManager::detect2DObject(float& pixel_x, float& pixel_y) {
 
 void VisionManager::convertToMM(float& x, float& y) {
 	// Convert from pixel to world co-ordinates in the camera frame
-	float img_centre_x = 400;
-	float img_centre_y = 400;
 
-	x = (x - img_centre_x) / pixels_permm_x;
-	y = (y - img_centre_y) / pixels_permm_y;
+	x = (x - img_centre_x_) / pixels_permm_x;
+	y = (y - img_centre_y_) / pixels_permm_y;
 }
 
 // Temporary Main Function for testing- This should go away later

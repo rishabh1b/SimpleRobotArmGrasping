@@ -13,6 +13,7 @@
 // #include <moveit_msgs/CollisionObject.h>
 #include <cv_bridge/cv_bridge.h>
 #include "robotarm_grasping/VisionManager.h"
+#include <tf/transform_listener.h>
 
 class SimpleGrasping {
 private:
@@ -31,9 +32,15 @@ private:
 
 	VisionManager vMng_;
 
+	tf::StampedTransform camera_to_robot_;
+	tf::TransformListener tf_camera_to_robot;
+
+	tf::Vector3 obj_camera_frame, obj_robot_frame;
+
 	// void attainPosition();
 public:
 	SimpleGrasping(ros::NodeHandle n_, float length = 1, float breadth = 0.6);
 	void imageCb(const sensor_msgs::ImageConstPtr& msg);
 	void attainPosition();
+	void attainObject();
 };
