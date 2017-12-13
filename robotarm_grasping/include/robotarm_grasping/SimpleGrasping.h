@@ -25,8 +25,9 @@ private:
     // For testing move_group
 	bool tried_once;
 
-	void attainPosition();
+	// void attainPosition();
 public:
 	SimpleGrasping(ros::NodeHandle n_);
 	void imageCb(const sensor_msgs::ImageConstPtr& msg);
+	void attainPosition();
 };

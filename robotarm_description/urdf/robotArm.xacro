@@ -88,7 +88,7 @@ This link is the base of the arm in which arm is placed
   <property name="grasp_frame_height" value="0.02" />
 
   <joint name="bottom_joint2" type="fixed">
-    <origin xyz="0.15 0.07 0.38" rpy="0 0 0" />
+    <origin xyz="0.15 0.07 0.45" rpy="0 0 0" />
     <parent link="base_link"/>
     <child link="base_link_2"/>
 </joint>
@@ -105,7 +105,7 @@ This link is the base of the arm in which arm is placed
       <origin xyz=" 0 0 -${base_link_height/2}"  rpy="0 0 0"/>
       <geometry>
 
-         <box size="0.5 0.5 0.02" />
+         <box size="0.2 0.2 0.02" />
 
       </geometry>
       <material name="Brown" />
@@ -114,7 +114,7 @@ This link is the base of the arm in which arm is placed
     <collision>
       <origin xyz=" 0 0 -0.04"  rpy="0 0 0"/>
       <geometry>
-         <box size="1 1 0.02" />
+         <box size="0.2 0.2 0.02" />
       </geometry>
       </collision>>
       <xacro:inertial_matrix mass="1000"/>
@@ -143,7 +143,7 @@ This link is the base of the arm in which arm is placed
       </geometry>
   </collision>
 
- <!-- xacro:inertial_matrix mass="1" -->
+ <!--xacro:inertial_matrix mass="1"-->
 </link>
 
 <!-- BASE LINK -->

@@ -56,8 +56,12 @@ void VisionManager::detectTable() {
     cv::circle(image, pt, 2, cv::Scalar(0,0,255), -1,8);
 
     // Update pixels_per_mm fields
-    pixels_permm_y = table_length / bbox.height;
-    pixels_permm_x = table_breadth / bbox.width;
+    pixels_permm_y = bbox.height / table_length;
+    pixels_permm_x = bbox.width / table_breadth;
+
+    // Test the conversion values
+    std::cout << "Pixels in y" << pixels_permm_y << std::endl;
+    std::cout << "Pixels in x" << pixels_permm_x << std::endl;
 
     // Update the boolean to indicate measurement has been received
     pixel_size_identified = true;

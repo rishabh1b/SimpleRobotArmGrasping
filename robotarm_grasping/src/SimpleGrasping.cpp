@@ -33,11 +33,11 @@ void SimpleGrasping::attainPosition() {
   // sleep(2.0);
 
   // Raw pointers are frequently used to refer to the planning group for improved performance.
-  const robot_state::JointModelGroup *joint_model_group =
-	group.getCurrentState()->getJointModelGroup("arm");
+   const robot_state::JointModelGroup *joint_model_group =
+	group.getCurrentState()->getJointModelGroup("arm"); 
 
   namespace rvt = rviz_visual_tools;
-  moveit_visual_tools::MoveItVisualTools visual_tools("base_link");
+  moveit_visual_tools::MoveItVisualTools visual_tools("base_link_2");
   visual_tools.deleteAllMarkers();
 
   // We can print the name of the reference frame for this robot.
@@ -50,30 +50,35 @@ void SimpleGrasping::attainPosition() {
 
   // For getting the pose
   geometry_msgs::PoseStamped currPose = group.getCurrentPose();
-  // std::cout<<group.getCurrentPose();
+  std::cout<<group.getCurrentPose();
 
   geometry_msgs::Pose target_pose1;
   target_pose1.orientation = currPose.pose.orientation;
-  target_pose1.position.x = 0;
-  target_pose1.position.y = 0.5;
-  target_pose1.position.z = 0.75;
+  //target_pose1.position.x = 0.4;
+  //target_pose1.position.y = 0.04;
+  //target_pose1.position.z = 0.32;
+
+   // Starting Postion before picking
+    target_pose1.position.x = 0.45;
+    target_pose1.position.y = 0.09;
+    target_pose1.position.z = 0.37;
   group.setPoseTarget(target_pose1);
 
   moveit::planning_interface::MoveGroupInterface::Plan my_plan;
 
   bool success = group.plan(my_plan);
 
-  ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");
+  /*ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");
 
   ROS_INFO_NAMED("tutorial", "Visualizing plan 1 as trajectory line");
   visual_tools.publishAxisLabeled(target_pose1, "pose1");
   // visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
   visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
   visual_tools.trigger();
-  visual_tools.prompt("next step");
+  visual_tools.prompt("next step");*/
 
   group.move();
-  sleep(3.0);
+  sleep(5.0);
 }
 
 int main(int argc, char** argv)
@@ -81,6 +86,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "simple_grasping");
   ros::NodeHandle n;
   SimpleGrasping simGrasp(n); 
-  ros::spin();
+  // ros::spin();
+  simGrasp.attainPosition();
   return 0;
 }

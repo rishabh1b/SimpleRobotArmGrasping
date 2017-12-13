@@ -166,7 +166,7 @@
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
       </link>
-      <pose>0 0.85 0.7 0 0 0</pose>
+      <pose>0 0.6 0.7 0 0 0</pose>
       <static>0</static>
       </model>
 
@@ -189,8 +189,8 @@
           <pose>0 0 0 0 0 0</pose>
         <geometry>
           <cylinder>
-            <radius>0.05</radius>
-            <length>0.08</length>
+            <radius>0.02</radius>
+            <length>0.06</length>
           </cylinder>
         </geometry>
           <surface>
@@ -212,8 +212,8 @@
           <pose>0 0 0 0 0 0</pose>
         <geometry>
           <cylinder>
-            <radius>0.05</radius>
-            <length>0.08</length>
+            <radius>0.02</radius>
+            <length>0.06</length>
           </cylinder>
         </geometry>
           <material>
@@ -235,7 +235,7 @@
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
       </link>
-      <pose>0.43 0.62 1.5 0 0 0</pose>
+      <pose>0.43 0.35 1.5 0 0 0</pose>
       <static>0</static>
       </model>
 
