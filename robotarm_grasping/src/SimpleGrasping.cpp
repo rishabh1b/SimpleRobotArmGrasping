@@ -1,7 +1,7 @@
 #include "robotarm_grasping/SimpleGrasping.h"
 
-SimpleGrasping::SimpleGrasping(ros::NodeHandle n_)
-    : it_(n_), group("arm")
+SimpleGrasping::SimpleGrasping(ros::NodeHandle n_, float length, float breadth)
+    : it_(n_), group("arm"), vMng_(length, breadth)
 {
     this->nh_ = n_;
     namespace rvt = rviz_visual_tools;
@@ -14,16 +14,31 @@ SimpleGrasping::SimpleGrasping(ros::NodeHandle n_)
 
     // this->display_publisher = nh_.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
 
-    tried_once = false;
+    obj_found = false;
 }
 
 void SimpleGrasping::imageCb(const sensor_msgs::ImageConstPtr& msg)
 {
-    ROS_INFO("Start Processing the Image");
-  	if (!tried_once)
-  		attainPosition();
+	if (!obj_found) {
+	    ROS_INFO("Start Processing the Image");
+	    try {
+	      cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+	    }
+	    catch (cv_bridge::Exception& e){
+	      ROS_ERROR("cv_bridge exception: %s", e.what());
+	      return;
+		}
 
-  	tried_once = true;
+	    ROS_INFO("Image Message Received");
+	    float obj_x, obj_y;
+	    vMng_.get2DLocation(cv_ptr->image, obj_x, obj_y);
+
+        // Temporary Debugging
+	    std::cout<< " X-Co-ordinate in Camera Frame :" << obj_x << std::endl;
+	    std::cout<< " Y-Co-ordinate in Camera Frame :" << obj_y << std::endl;
+
+	    obj_found = true;
+	}
 }
 
 void SimpleGrasping::attainPosition() {
@@ -84,9 +99,12 @@ void SimpleGrasping::attainPosition() {
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "simple_grasping");
+  float length = 1;
+  float breadth = 0.6;
+
   ros::NodeHandle n;
   SimpleGrasping simGrasp(n); 
-  // ros::spin();
+  ros::spinOnce();
   simGrasp.attainPosition();
   return 0;
 }

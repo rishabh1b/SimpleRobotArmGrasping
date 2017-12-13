@@ -128,9 +128,12 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/robotarm_grasping.cpp
-# )
+ add_library(visonManager
+   src/VisionManager.cpp
+ )
+
+ target_link_libraries(visonManager
+  ${OpenCV_LIBS})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -141,7 +144,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/robotarm_grasping_node.cpp)
-add_executable(VisionManagerTest src/VisionManager.cpp)
+# add_executable(VisionManagerTest src/VisionManager.cpp)
 
 add_executable(simpleGrasping src/SimpleGrasping.cpp)
 
@@ -159,12 +162,13 @@ add_executable(simpleGrasping src/SimpleGrasping.cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(VisionManagerTest
-	${OpenCV_LIBS} 
-        ${catkin_LIBRARIES}
- )
 
-target_link_libraries(simpleGrasping ${catkin_LIBRARIES})
+#target_link_libraries(VisionManagerTest
+#	${OpenCV_LIBS} 
+#        ${catkin_LIBRARIES}
+# )
+
+target_link_libraries(simpleGrasping visonManager ${catkin_LIBRARIES})
 
 #############
 ## Install ##

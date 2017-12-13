@@ -11,6 +11,8 @@
 #include <moveit_visual_tools/moveit_visual_tools.h>
 // #include <moveit_msgs/AttachedCollisionObject.h>
 // #include <moveit_msgs/CollisionObject.h>
+#include <cv_bridge/cv_bridge.h>
+#include "robotarm_grasping/VisionManager.h"
 
 class SimpleGrasping {
 private:
@@ -23,11 +25,15 @@ private:
 	image_transport::Subscriber image_sub_;
 
     // For testing move_group
-	bool tried_once;
+	bool obj_found;
+
+	cv_bridge::CvImagePtr cv_ptr;
+
+	VisionManager vMng_;
 
 	// void attainPosition();
 public:
-	SimpleGrasping(ros::NodeHandle n_);
+	SimpleGrasping(ros::NodeHandle n_, float length = 1, float breadth = 0.6);
 	void imageCb(const sensor_msgs::ImageConstPtr& msg);
 	void attainPosition();
 };

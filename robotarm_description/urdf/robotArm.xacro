@@ -102,7 +102,7 @@ This link is the base of the arm in which arm is placed
   <link name="bottom_link">
 
     <visual>
-      <origin xyz=" 0 0 -${base_link_height/2}"  rpy="0 0 0"/>
+      <origin xyz=" 0 0 -${base_link_height/2 + 0.01}"  rpy="0 0 0"/>
       <geometry>
 
          <box size="0.2 0.2 0.02" />
@@ -112,12 +112,12 @@ This link is the base of the arm in which arm is placed
     </visual>
 
     <collision>
-      <origin xyz=" 0 0 -0.04"  rpy="0 0 0"/>
+      <origin xyz=" 0 0 -${base_link_height/2 + 0.01}"  rpy="0 0 0"/>
       <geometry>
          <box size="0.2 0.2 0.02" />
       </geometry>
       </collision>>
-      <xacro:inertial_matrix mass="1000"/>
+      <xacro:inertial_matrix mass="10"/>
   </link>
 
   <gazebo reference="bottom_link">

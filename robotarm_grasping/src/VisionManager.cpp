@@ -137,6 +137,7 @@ void VisionManager::convertToMM(float& x, float& y) {
 }
 
 // Temporary Main Function for testing- This should go away later
+/*
 int main(int argc, char** argv ) {
 	if ( argc != 2 )
     {
@@ -163,7 +164,7 @@ int main(int argc, char** argv ) {
     std::cout<< " Y-Co-ordinate in Camera Frame :" << obj_y << std::endl;
 
     cv::waitKey(0);
-}
+}*/
 
 
 
