@@ -105,18 +105,18 @@ This link is the base of the arm in which arm is placed
       <origin xyz=" 0 0 -${base_link_height/2 + 0.01}"  rpy="0 0 0"/>
       <geometry>
 
-         <box size="0.2 0.2 0.02" />
+         <box size="0.5 0.2 0.02" />
 
       </geometry>
       <material name="Brown" />
     </visual>
 
-    <collision>
+    <!--collision>
       <origin xyz=" 0 0 -${base_link_height/2 + 0.01}"  rpy="0 0 0"/>
       <geometry>
          <box size="0.2 0.2 0.02" />
       </geometry>
-      </collision>>
+      </collision-->
       <xacro:inertial_matrix mass="90"/>
   </link>
 
