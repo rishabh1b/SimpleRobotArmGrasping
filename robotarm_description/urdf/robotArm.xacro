@@ -72,13 +72,13 @@ This link is the base of the arm in which arm is placed
   <!-- Left gripper -->
   <property name="left_gripper_len" value="0.08" />
   <property name="left_gripper_width" value="0.01" />
-  <property name="left_gripper_height" value="0.01" />
+  <property name="left_gripper_height" value="0.03" />
 
 
   <!-- Right gripper -->
   <property name="right_gripper_len" value="0.08" />
   <property name="right_gripper_width" value="0.01" />
-  <property name="right_gripper_height" value="0.01" />
+  <property name="right_gripper_height" value="0.03" />
 
 
 
@@ -117,7 +117,7 @@ This link is the base of the arm in which arm is placed
          <box size="0.2 0.2 0.02" />
       </geometry>
       </collision>>
-      <xacro:inertial_matrix mass="10"/>
+      <xacro:inertial_matrix mass="100"/>
   </link>
 
   <gazebo reference="bottom_link">
@@ -396,7 +396,7 @@ This link is the base of the arm in which arm is placed
     <child link="gripper_finger_link1"/>
     <origin xyz="0.0 0 0" />
     <axis xyz="0 1 0" />
-      <limit effort="100" lower="0.03" upper="0" velocity="1.0"/>
+      <limit effort="100" lower="0" upper="0.03" velocity="1.0"/>
 
       <safety_controller k_position="20"
                          k_velocity="20"
@@ -423,6 +423,14 @@ This link is the base of the arm in which arm is placed
       </geometry>
       <material name="White" />
     </visual>
+
+    <collision>
+      <origin xyz="0.04 -0.03 0"/>
+      <geometry>
+            <box size="${left_gripper_len} ${left_gripper_width} ${left_gripper_height}" />
+      </geometry>
+    </collision>
+
   <xacro:inertial_matrix mass="1"/>
   </link>
 
@@ -459,6 +467,14 @@ This link is the base of the arm in which arm is placed
       </geometry>
       <material name="White" />
     </visual>
+
+    <collision>
+      <origin xyz="0.04 0.03 0"/>
+      <geometry>
+            <box size="${right_gripper_len} ${right_gripper_width} ${right_gripper_height}" />
+      </geometry>
+    </collision>
+
   <xacro:inertial_matrix mass="1"/>
   </link>
 

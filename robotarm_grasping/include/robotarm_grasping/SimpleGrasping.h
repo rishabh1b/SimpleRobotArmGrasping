@@ -19,7 +19,8 @@ class SimpleGrasping {
 private:
 	ros::NodeHandle nh_;
 	geometry_msgs::Pose target_pose1;
-	moveit::planning_interface::MoveGroupInterface group;
+	moveit::planning_interface::MoveGroupInterface armgroup;
+	moveit::planning_interface::MoveGroupInterface grippergroup;
 	// ros::Publisher display_publisher;
 	// moveit_visual_tools::MoveItVisualTools visual_tools;
 	image_transport::ImageTransport it_;
@@ -43,4 +44,6 @@ public:
 	void imageCb(const sensor_msgs::ImageConstPtr& msg);
 	void attainPosition();
 	void attainObject();
+	void grasp();
+	void lift();
 };

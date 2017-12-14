@@ -30,7 +30,7 @@
  <gazebo reference="base_link">
     <material>Gazebo/Black</material>
     <static>true</static>
-    <turnGravityOff>true</turnGravityOff>
+    <!--turnGravityOff>true</turnGravityOff-->
 </gazebo>
 
  <gazebo reference="base_link_2">
