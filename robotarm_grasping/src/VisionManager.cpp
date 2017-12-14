@@ -79,8 +79,8 @@ void VisionManager::detectTable() {
        cv::drawContours( image, contours, i, color, 1, 8, hierarchy, 0, cv::Point() );
      }
 
-    cv::namedWindow("Table Detection", cv::WINDOW_AUTOSIZE);
-    cv::imshow("Table Detection", image); 
+    // cv::namedWindow("Table Detection", cv::WINDOW_AUTOSIZE);
+    // cv::imshow("Table Detection", image); 
 
 }
 
@@ -125,8 +125,8 @@ void VisionManager::detect2DObject(float& pixel_x, float& pixel_y) {
        cv::drawContours( image, contours, i, color, 1, 8, hierarchy, 0, cv::Point() );
      }
 
-    cv::namedWindow("Centre point", cv::WINDOW_AUTOSIZE);
-    cv::imshow("Centre point", image);
+    // cv::namedWindow("Centre point", cv::WINDOW_AUTOSIZE);
+    // cv::imshow("Centre point", image);
 }
 
 void VisionManager::convertToMM(float& x, float& y) {

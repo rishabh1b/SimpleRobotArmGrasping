@@ -30,13 +30,15 @@ SimpleGrasping::SimpleGrasping(ros::NodeHandle n_, float length, float breadth)
       ROS_ERROR("[adventure_slam]: (lookup) %s", ex.what());
 	} 
 
-    obj_found = false;
+    grasp_running = false;
+    
+    ros::WallDuration(10.0).sleep(); 
 }
 
 void SimpleGrasping::imageCb(const sensor_msgs::ImageConstPtr& msg)
 {
-	if (!obj_found) {
-	    ROS_INFO("Start Processing the Image");
+	if (!grasp_running) {
+	    ROS_INFO_STREAM("Processing the Image to locate the Object...");
 	    try {
 	      cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
 	    }
@@ -45,71 +47,61 @@ void SimpleGrasping::imageCb(const sensor_msgs::ImageConstPtr& msg)
 	      return;
 		}
 
-	    ROS_INFO("Image Message Received");
+	    // ROS_INFO("Image Message Received");
 	    float obj_x, obj_y;
 	    vMng_.get2DLocation(cv_ptr->image, obj_x, obj_y);
 
-        // Temporary Debugging
-	    std::cout<< " X-Co-ordinate in Camera Frame :" << obj_x << std::endl;
-	    std::cout<< " Y-Co-ordinate in Camera Frame :" << obj_y << std::endl;
+      // Temporary Debugging
+	    //std::cout<< " X-Co-ordinate in Camera Frame :" << obj_x << std::endl;
+	    // std::cout<< " Y-Co-ordinate in Camera Frame :" << obj_y << std::endl;
 
 	    obj_camera_frame.setY(-obj_x);
 	    obj_camera_frame.setZ(-obj_y);
 	    obj_camera_frame.setX(4.7);
         
 	    obj_robot_frame = camera_to_robot_ * obj_camera_frame;
-	    obj_found = true;
+	    grasp_running = true;
 
-	    std::cout<< " X-Co-ordinate in Robot Frame :" << obj_robot_frame.getX() << std::endl;
-	    std::cout<< " Y-Co-ordinate in Robot Frame :" << obj_robot_frame.getY() << std::endl;
-	    std::cout<< " Z-Co-ordinate in Robot Frame :" << obj_robot_frame.getZ() << std::endl;
-	    // cv::waitKey(0);
+      // Temporary Debugging
+	    // std::cout<< " X-Co-ordinate in Robot Frame :" << obj_robot_frame.getX() << std::endl;
+	    // std::cout<< " Y-Co-ordinate in Robot Frame :" << obj_robot_frame.getY() << std::endl;
+	    // std::cout<< " Z-Co-ordinate in Robot Frame :" << obj_robot_frame.getZ() << std::endl;
 	}
 }
 
-void SimpleGrasping::attainPosition() {
-  ROS_INFO("The attain position function called");
-  ros::AsyncSpinner spinner(1);
-  spinner.start();
-  // sleep(2.0);
-
-  // Raw pointers are frequently used to refer to the planning group for improved performance.
-   const robot_state::JointModelGroup *joint_model_group =
-	armgroup.getCurrentState()->getJointModelGroup("arm"); 
+void SimpleGrasping::attainPosition(float x, float y, float z) {
+  // ROS_INFO("The attain position function called");
 
   namespace rvt = rviz_visual_tools;
   moveit_visual_tools::MoveItVisualTools visual_tools("base_link_2");
   visual_tools.deleteAllMarkers();
 
   // We can print the name of the reference frame for this robot.
-  ROS_INFO("Reference frame: %s", armgroup.getPlanningFrame().c_str());
+  // ROS_INFO("Reference frame: %s", armgroup.getPlanningFrame().c_str());
   
   // We can also print the name of the end-effector link for this group.
-  ROS_INFO("Reference frame: %s", armgroup.getEndEffectorLink().c_str());
+  // ROS_INFO("Reference frame: %s", armgroup.getEndEffectorLink().c_str());
 
-  ROS_INFO("Group names: %s", 	armgroup.getName().c_str());
+  // ROS_INFO("Group names: %s", 	armgroup.getName().c_str());
 
   // For getting the pose
   geometry_msgs::PoseStamped currPose = armgroup.getCurrentPose();
-  std::cout<<armgroup.getCurrentPose();
 
   geometry_msgs::Pose target_pose1;
   target_pose1.orientation = currPose.pose.orientation;
-  //target_pose1.position.x = 0.4;
-  //target_pose1.position.y = 0.04;
-  //target_pose1.position.z = 0.32;
 
    // Starting Postion before picking
-    target_pose1.position.x = 0.45;
-    target_pose1.position.y = 0.09;
-    target_pose1.position.z = 0.37;
+    target_pose1.position.x = x;
+    target_pose1.position.y = y;
+    target_pose1.position.z = z;
   armgroup.setPoseTarget(target_pose1);
-
-  moveit::planning_interface::MoveGroupInterface::Plan my_plan;
 
   armgroup.plan(my_plan);
 
   /*ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");
+
+   const robot_state::JointModelGroup *joint_model_group =
+  armgroup.getCurrentState()->getJointModelGroup("arm"); 
 
   ROS_INFO_NAMED("tutorial", "Visualizing plan 1 as trajectory line");
   visual_tools.publishAxisLabeled(target_pose1, "pose1");
@@ -123,62 +115,13 @@ void SimpleGrasping::attainPosition() {
 }
 
 void SimpleGrasping::attainObject() {
-  ROS_INFO("The attain Object function called");
-  ros::AsyncSpinner spinner(1);
-  spinner.start();
-  // sleep(2.0);
+  // ROS_INFO("The attain Object function called");
 
-  // Raw pointers are frequently used to refer to the planning group for improved performance.
-   const robot_state::JointModelGroup *joint_model_group =
-	armgroup.getCurrentState()->getJointModelGroup("arm"); 
-
-  namespace rvt = rviz_visual_tools;
-  moveit_visual_tools::MoveItVisualTools visual_tools("base_link_2");
-  visual_tools.deleteAllMarkers();
-
-  // We can print the name of the reference frame for this robot.
-  ROS_INFO("Reference frame: %s", armgroup.getPlanningFrame().c_str());
-  
-  // We can also print the name of the end-effector link for this group.
-  ROS_INFO("Reference frame: %s", armgroup.getEndEffectorLink().c_str());
-
-  ROS_INFO("Group names: %s", 	armgroup.getName().c_str());
-
-  // For getting the pose
-  geometry_msgs::PoseStamped currPose = armgroup.getCurrentPose();
-  // std::cout<<armgroup.getCurrentPose();
-
-  geometry_msgs::Pose target_pose1;
-  target_pose1.orientation = currPose.pose.orientation;
-  //target_pose1.position.x = 0.4;
-  //target_pose1.position.y = 0.04;
-  //target_pose1.position.z = 0.32;
-
-   // Starting Postion before picking
-   target_pose1.position.x = obj_robot_frame.getX();
-   target_pose1.position.y = obj_robot_frame.getY();
-   target_pose1.position.z = obj_robot_frame.getZ();
-   armgroup.setPoseTarget(target_pose1);
-
-  moveit::planning_interface::MoveGroupInterface::Plan my_plan;
-
-  armgroup.plan(my_plan);
-
-  /*ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");
-
-  ROS_INFO_NAMED("tutorial", "Visualizing plan 1 as trajectory line");
-  visual_tools.publishAxisLabeled(target_pose1, "pose1");
-  // visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
-  visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
-  visual_tools.trigger();
-  visual_tools.prompt("next step");*/
-
-  armgroup.move();
-  sleep(5.0);
+  attainPosition(obj_robot_frame.getX(), obj_robot_frame.getY(), obj_robot_frame.getZ());
 
   // Slide down the Object
-  currPose = armgroup.getCurrentPose();
-  std::cout<<armgroup.getCurrentPose();
+  geometry_msgs::PoseStamped currPose = armgroup.getCurrentPose();
+  geometry_msgs::Pose target_pose1;
 
   target_pose1.orientation = currPose.pose.orientation;
   target_pose1.position = currPose.pose.position;
@@ -194,9 +137,7 @@ void SimpleGrasping::attainObject() {
 }
 
 void SimpleGrasping::grasp() {
-  ROS_INFO("The Grasping function called");
-  ros::AsyncSpinner spinner(1);
-  spinner.start();
+  // ROS_INFO("The Grasping function called");
 
   ros::WallDuration(1.0).sleep();   
   grippergroup.setNamedTarget("Close");
@@ -205,10 +146,7 @@ void SimpleGrasping::grasp() {
 }
 
 void SimpleGrasping::lift() {
-  ROS_INFO("The lift function called");
-  ros::AsyncSpinner spinner(1);
-  spinner.start();
-  // sleep(2.0);
+  // ROS_INFO("The lift function called");
 
   // For getting the pose
   geometry_msgs::PoseStamped currPose = armgroup.getCurrentPose();
@@ -229,6 +167,37 @@ void SimpleGrasping::lift() {
   sleep(5.0);
 }
 
+void SimpleGrasping::goHome() {
+  // Open Gripper
+  ros::WallDuration(1.0).sleep();   
+  grippergroup.setNamedTarget("Open");
+  grippergroup.move();
+  sleep(5.0);
+
+  geometry_msgs::PoseStamped currPose = armgroup.getCurrentPose();
+  // Go to Home Position
+  attainPosition(currPose.pose.position.x, currPose.pose.position.y - 0.5, currPose.pose.position.z);
+  attainPosition(homePose.pose.position.x, homePose.pose.position.y, homePose.pose.position.z);
+}
+
+void SimpleGrasping::initiateGrasping() {
+  ros::AsyncSpinner spinner(1);
+  spinner.start();
+  ros::WallDuration(2.0).sleep();  
+  homePose = armgroup.getCurrentPose();
+  ROS_INFO_STREAM("Getting into the Grasping Position....");
+  attainPosition(0.45,0.09, 0.37);
+  ROS_INFO_STREAM("Approaching the Object....");
+  attainObject();
+  ROS_INFO_STREAM("Attempting to Grasp the Object now..");
+  grasp();
+  ROS_INFO_STREAM("Lifting the Object....");
+  lift(); 
+  ROS_INFO_STREAM("Going back to home position....");
+  goHome();
+  grasp_running = false;
+}
+
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "simple_grasping");
@@ -237,10 +206,11 @@ int main(int argc, char** argv)
 
   ros::NodeHandle n;
   SimpleGrasping simGrasp(n); 
+  ROS_INFO_STREAM("Waiting for five seconds..");
+  ros::WallDuration(10.0).sleep();  
+  while (ros::ok()) {
   ros::spinOnce();
-  simGrasp.attainPosition();
-  simGrasp.attainObject();
-  simGrasp.grasp();
-  simGrasp.lift();
+  simGrasp.initiateGrasping();
+  }
   return 0;
 }

@@ -117,7 +117,7 @@ This link is the base of the arm in which arm is placed
          <box size="0.2 0.2 0.02" />
       </geometry>
       </collision>>
-      <xacro:inertial_matrix mass="100"/>
+      <xacro:inertial_matrix mass="90"/>
   </link>
 
   <gazebo reference="bottom_link">

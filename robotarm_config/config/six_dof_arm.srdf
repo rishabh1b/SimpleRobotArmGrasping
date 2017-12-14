@@ -20,12 +20,12 @@
     </group>
 
     <group_state name="Open" group="gripper">
-        <joint name="finger_joint1" value="0.02" />
-        <joint name="finger_joint2" value="-0.02" />     
+        <joint name="finger_joint1" value="0" />
+        <joint name="finger_joint2" value="-0.03" />     
     </group_state>
 
     <group_state name="Close" group="gripper">
-        <joint name="finger_joint1" value="0.01" />
+        <joint name="finger_joint1" value="0.0" />
         <joint name="finger_joint2" value="-0.01" />      
     </group_state>
 

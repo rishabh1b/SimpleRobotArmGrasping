@@ -175,7 +175,7 @@
         <pose>0 0 0 0 0 0</pose>
         <inertial>
           <!-- pose>0.000 0.0 0 0 0 0 !-->
-          <mass>0.26</mass>
+          <mass>0.026</mass>
           <inertia>
             <ixx>1.58946</ixx>
             <ixy>-0.00120742</ixy>
