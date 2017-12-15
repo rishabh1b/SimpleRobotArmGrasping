@@ -1,23 +1,16 @@
-# This config file for Travis CI utilizes https://github.com/ros-planning/moveit_ci/ package.
 sudo: required
-dist: trusty
+language: cpp
 services:
   - docker
-language: generic
-compiler:
-  - gcc
-notifications:
-  email:
-    recipients:
-      # - rbiyani@terpmail.umd.edu
+
 env:
-  matrix:
-    - ROS_DISTRO=kinetic  ROS_REPO=ros              UPSTREAM_WORKSPACE=https://raw.githubusercontent.com/ros-planning/moveit/kinetic-devel/moveit.rosinstall
-    - ROS_DISTRO=kinetic  ROS_REPO=ros-shadow-fixed UPSTREAM_WORKSPACE=https://raw.githubusercontent.com/ros-planning/moveit/kinetic-devel/moveit.rosinstal
-matrix:
-  allow_failures:
-    - env: ROS_DISTRO=kinetic  ROS_REPO=ros              UPSTREAM_WORKSPACE=https://raw.githubusercontent.com/ros-planning/moveit/kinetic-devel/moveit.rosinstall
-before_script:
-  - git clone -q https://github.com/ros-planning/moveit_ci.git .moveit_ci
+  global:
+    - toolset_branch: master
+    - server_type: travis
+    - ros_release_name: kinetic
+    - ubuntu_version_name: xenial
+    - used_modules: check_cache, check_build, software_tests, code_style_check, check_deb_make, codecov_tool
+    - remote_shell_script: 'https://raw.githubusercontent.com/shadow-robot/sr-build-tools/$toolset_branch/bin/sr-run-ci-build.sh'
+
 script:
-  - source .moveit_ci/travis.sh
+- curl -s "$( echo "$remote_shell_script" | sed 's/#/%23/g' )" | bash -x /dev/stdin "$toolset_branch" $server_type $used_modules
