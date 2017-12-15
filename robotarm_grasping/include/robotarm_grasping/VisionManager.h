@@ -5,11 +5,11 @@
 #include <iostream>
 
 class VisionManager {
-public :
+  public :
 	VisionManager(float length, float breadth);
 	void get2DLocation(cv::Mat img, float& x, float& y);
 
-private:
+  private:
 	void detect2DObject(float& pixel_x, float& pixel_y);
 	void convertToMM(float& pixel_mm_x, float& pixel_mm_y);
 	void detectTable();

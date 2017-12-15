@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+	<include file="$(find robotarm_config)/launch/robotarm_bringup_moveit.launch">
+	</include>
+
+  	<node pkg="robotarm_grasping" name="simpleGrasping" type="simpleGrasping" output="screen">
+    		<param name="table_length"              value="1"/>
+    		<param name="table_breadth"          value="0.6"/>
+    		<param name="pregrasp_x"            value="0.45"/>
+    		<param name="pregrasp_y"            value="0.09"/>
+    		<param name="pregrasp_z"            value="0.37"/>
+</node>
+
+</launch>
