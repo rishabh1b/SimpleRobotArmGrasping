@@ -98,7 +98,7 @@
 </gazebo>
 
  <gazebo reference="bottom_link">
-    <!--static>true</static-->
+    <static>true</static>
     <!-- turnGravityOff>true</turnGravityOff -->
 </gazebo>
 	</robot>

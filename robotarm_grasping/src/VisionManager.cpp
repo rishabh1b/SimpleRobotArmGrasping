@@ -25,7 +25,7 @@ void VisionManager::detectTable() {
 	cv::Mat gray_image_red = RGB[2];
 	cv::Mat gray_image_green = RGB[1];
 	cv::Mat denoiseImage;
-	cv::medianBlur(gray_image_red, denoiseImage, 3);
+    cv::medianBlur(gray_image_red, denoiseImage, 3);
 
 	// Threshold the Image
 	cv::Mat binaryImage = denoiseImage;
