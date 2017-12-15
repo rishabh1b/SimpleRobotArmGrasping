@@ -1,0 +1,12 @@
+Checking src/SimpleGrasping.cpp...
+1/2 files checked 57% done
+Checking src/VisionManager.cpp...
+[src/VisionManager.cpp:42]: (warning) Member variable 'VisionManager::pixels_permm_x' is not initialized in the constructor.
+[src/VisionManager.cpp:42]: (warning) Member variable 'VisionManager::pixels_permm_y' is not initialized in the constructor.
+[src/VisionManager.cpp:42]: (warning) Member variable 'VisionManager::curr_pixel_centre_x' is not initialized in the constructor.
+[src/VisionManager.cpp:42]: (warning) Member variable 'VisionManager::curr_pixel_centre_y' is not initialized in the constructor.
+[src/VisionManager.cpp:42]: (warning) Member variable 'VisionManager::img_centre_x_' is not initialized in the constructor.
+[src/VisionManager.cpp:42]: (warning) Member variable 'VisionManager::img_centre_y_' is not initialized in the constructor.
+2/2 files checked 100% done
+(information) Cppcheck cannot find all the include files (use --check-config for details)
+
