@@ -1,0 +1,75 @@
+\hypertarget{class_simple_grasping}{\section{Simple\-Grasping Class Reference}
+\label{class_simple_grasping}\index{Simple\-Grasping@{Simple\-Grasping}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_simple_grasping_a2378696c46e6f023d5032919b1af8fad}{Simple\-Grasping} (ros\-::\-Node\-Handle n\-\_\-, float pregrasp\-\_\-x, float pregrasp\-\_\-y, float pregrasp\-\_\-z, float length=1, float breadth=0.\-6)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_simple_grasping}{Simple\-Grasping} behaviour Constructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_simple_grasping_a133954726ab489d9c5d7c20b4504eb82}{image\-Cb} (const sensor\-\_\-msgs\-::\-Image\-Const\-Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em image\-Cb is called when a new image is received from the camera \end{DoxyCompactList}\item 
+\hypertarget{class_simple_grasping_adb6d0c8e6d4f0668c212181bb82cf8ff}{void \hyperlink{class_simple_grasping_adb6d0c8e6d4f0668c212181bb82cf8ff}{initiate\-Grasping} ()}\label{class_simple_grasping_adb6d0c8e6d4f0668c212181bb82cf8ff}
+
+\begin{DoxyCompactList}\small\item\em initiate\-Grasping initiates the grasping behaviour \end{DoxyCompactList}\item 
+\hypertarget{class_simple_grasping_a771b6bba25730dbaf2ff72a4bd6938a1}{void \hyperlink{class_simple_grasping_a771b6bba25730dbaf2ff72a4bd6938a1}{go\-Home} ()}\label{class_simple_grasping_a771b6bba25730dbaf2ff72a4bd6938a1}
+
+\begin{DoxyCompactList}\small\item\em Function brings the arm back to home configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_simple_grasping_a2378696c46e6f023d5032919b1af8fad}{\index{Simple\-Grasping@{Simple\-Grasping}!Simple\-Grasping@{Simple\-Grasping}}
+\index{Simple\-Grasping@{Simple\-Grasping}!SimpleGrasping@{Simple\-Grasping}}
+\subsubsection[{Simple\-Grasping}]{\setlength{\rightskip}{0pt plus 5cm}Simple\-Grasping\-::\-Simple\-Grasping (
+\begin{DoxyParamCaption}
+\item[{ros\-::\-Node\-Handle}]{n\-\_\-, }
+\item[{float}]{pregrasp\-\_\-x, }
+\item[{float}]{pregrasp\-\_\-y, }
+\item[{float}]{pregrasp\-\_\-z, }
+\item[{float}]{length = {\ttfamily 1}, }
+\item[{float}]{breadth = {\ttfamily 0.6}}
+\end{DoxyParamCaption}
+)}}\label{class_simple_grasping_a2378696c46e6f023d5032919b1af8fad}
+
+
+\hyperlink{class_simple_grasping}{Simple\-Grasping} behaviour Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n\-\_\-} & ros\-\_\-\-Node\-Handle \\
+\hline
+\mbox{\tt in}  & {\em pregrasp\-\_\-x} & Desired Pregrasping\-X \\
+\hline
+\mbox{\tt in}  & {\em pregrasp\-\_\-y} & Desired Pregrasping\-Y \\
+\hline
+\mbox{\tt in}  & {\em pregrasp\-\_\-z} & Desired Pregrasping\-Z \\
+\hline
+\mbox{\tt in}  & {\em length} & The length of table \\
+\hline
+\mbox{\tt in}  & {\em breadth} & The breadth of table \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_simple_grasping_a133954726ab489d9c5d7c20b4504eb82}{\index{Simple\-Grasping@{Simple\-Grasping}!image\-Cb@{image\-Cb}}
+\index{image\-Cb@{image\-Cb}!SimpleGrasping@{Simple\-Grasping}}
+\subsubsection[{image\-Cb}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\-Grasping\-::image\-Cb (
+\begin{DoxyParamCaption}
+\item[{const sensor\-\_\-msgs\-::\-Image\-Const\-Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}}\label{class_simple_grasping_a133954726ab489d9c5d7c20b4504eb82}
+
+
+image\-Cb is called when a new image is received from the camera 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em msg} & Image received as a message \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Simple\-Robot\-Arm\-Grasping/robotarm\-\_\-grasping/include/robotarm\-\_\-grasping/\hyperlink{_simple_grasping_8h}{Simple\-Grasping.\-h}\item 
+Simple\-Robot\-Arm\-Grasping/robotarm\-\_\-grasping/src/\hyperlink{_simple_grasping_8cpp}{Simple\-Grasping.\-cpp}\end{DoxyCompactItemize}
