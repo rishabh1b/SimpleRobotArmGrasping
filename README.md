@@ -1,7 +1,6 @@
 # SimpleRobotArmGrasping
-## Overview
 [![Build Status](https://travis-ci.org/rishabh1b/SimpleRobotArmGrasping.svg?branch=master)](https://travis-ci.org/rishabh1b/SimpleRobotArmGrasping)
-
+## Overview
 In this project an attempt is made to simulate a basic grasping application using a two finger gripper to grasp uniform objects like a cylinder.  The focus was to be able to come with an intial prototype of the arm that will be installed on a mobile manipulator. Typically, an object that lies on the table needs to be grasped. The camera on the top of the table provides a visual feedback on the location of the object in 2D. The location of the camera is known w.r.t to the Robot frame (by a technique called as Robot-Camera Calibration). I am assuming that the geometry of the object to be grasped is uniform (cylinder) and its height is known, so I have used the 2D camera information to move my manipulator to this point to grasp and lift this object. Although, this seems to be a machine vision application, the camera setting described here gives the initial proof of concept. This camera can be replaced by a 3D camera which would be attached to the robot’s body and this in turn will give the necessary 3D position of the object to be grasped. The robot platform is custom-designed using URDF and xacro. 
 
 ## Description of packages in this repository
