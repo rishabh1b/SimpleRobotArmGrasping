@@ -44,6 +44,11 @@ Also, Sprint Planning notes are located [here](https://docs.google.com/document/
 2. To generate documentation, run ```sudo apt-get install doxygen-gui```. This is basically a GUI for doxygen. Once installed, run 
 ```doxywizard``` on the command line to launch the application. Then four steps to generate the documention are self-explanatory as in the wizard.
 
+## Demonstration
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=https://youtu.be/j-qDS4KmnUQ
+" target="_blank"><img src="https://github.com/rishabh1b/SimpleRobotArmGrasping/blob/master/outputs/output1.png" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 ## Known Issues/Bugs
 1. Gripper does not open once closed
 2. Arm does not have a perception of the table and hence it may collide at times.
