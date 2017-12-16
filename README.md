@@ -40,7 +40,9 @@ Also, Sprint Planning notes are located [here](https://docs.google.com/document/
 3. MoveIt!. This can called from [here](http://moveit.ros.org/install/). Make sure you Follow Instructions for ROS Kinetic
 
 ## Doxygen Documentation
-*Details will be added soon*
+1. Detailed documentation can be found under ```/docs/html/index.html```. 
+2. To generate documentation, run ```sudo apt-get install doxygen-gui```. This is basically a GUI for doxygen. Once installed, run 
+```doxywizard``` on the command line to launch the application. Then four steps to generate the documention are self-explanatory as in the wizard.
 
 ## Known Issues/Bugs
 1. Gripper does not open once closed
